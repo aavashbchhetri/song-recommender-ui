@@ -32,6 +32,7 @@ def preload():
 
     # Load scaler
 <<<<<<< HEAD
+<<<<<<< HEAD
     try:
         resp = requests.get(DEFAULT_SCALER_URL)
         resp.raise_for_status()
@@ -80,6 +81,55 @@ def get_recommendations(input_songs, top_k=5):
     if FEATURES_ALL_SCALED is None or TRACK_NAMES is None or len(TRACK_NAMES) == 0:
         return []
 
+=======
+    try:
+        resp = requests.get(DEFAULT_SCALER_URL)
+        resp.raise_for_status()
+        SCALER = cloudpickle.loads(resp.content)
+    except Exception as e:
+        print(f"Error loading scaler: {e}", file=sys.stderr)
+        SCALER = None
+
+    # Load model (optional, if used)
+    try:
+        resp = requests.get(DEFAULT_NN_MODEL_URL)
+        resp.raise_for_status()
+        MODEL = cloudpickle.loads(resp.content)
+    except Exception as e:
+        print(f"Error loading model: {e}", file=sys.stderr)
+        MODEL = None
+
+    # Load dataset
+    try:
+        SONGS_DF = pd.read_csv(DEFAULT_DATASET_URL)
+        numeric_cols = SONGS_DF.select_dtypes(include=[np.number]).columns.tolist()
+        FEATURES_ALL = SONGS_DF[numeric_cols].fillna(0).values.astype(float)
+        FEATURES_ALL_SCALED = SCALER.transform(FEATURES_ALL) if SCALER else FEATURES_ALL
+
+        TRACK_NAMES = SONGS_DF["track_name"].fillna("").astype(str).values
+        try:
+            LOWERED = np.char.lower(TRACK_NAMES)
+        except Exception:
+            LOWERED = np.array([str(x).lower() for x in TRACK_NAMES])
+    except Exception as e:
+        print(f"Error loading dataset: {e}", file=sys.stderr)
+        SONGS_DF = pd.DataFrame()
+        FEATURES_ALL = FEATURES_ALL_SCALED = np.zeros((0,0))
+        TRACK_NAMES = LOWERED = np.array([])
+
+# Run preload at cold start
+preload()
+
+# -----------------------------
+# Recommendation function
+# -----------------------------
+def get_recommendations(input_songs, top_k=5):
+    global FEATURES_ALL_SCALED, TRACK_NAMES, LOWERED
+
+    if FEATURES_ALL_SCALED is None or TRACK_NAMES is None or len(TRACK_NAMES) == 0:
+        return []
+
+>>>>>>> 48fd38e... Refactor recommend.py for better structure
 =======
     try:
         resp = requests.get(DEFAULT_SCALER_URL)
