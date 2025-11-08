@@ -49,7 +49,7 @@ export default function Home() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "/api/songs",
+        "/api/recommendations",
         { songs: selectedSongs },
         {
           headers: {
