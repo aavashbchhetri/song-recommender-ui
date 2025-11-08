@@ -1,0 +1,236 @@
+.container {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #4c1d95, #312e81, #000000);
+  color: white;
+  overflow: hidden;
+}
+
+.mainContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  gap: 1.5rem;
+}
+
+.logo {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(to bottom right, #ec4899, #6366f1);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: rotate(6deg);
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(to right, #ec4899, #6366f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.25rem;
+}
+
+.mainSection {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.searchContainer {
+  position: relative;
+  max-width: 75%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem 3rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(236, 72, 153, 0.5);
+  box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.25);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.suggestions {
+  position: absolute;
+  width: 100%;
+  margin-top: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 50;
+}
+
+.suggestionItem {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.selectedSongs {
+  margin-top: 2rem;
+}
+
+.songTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  margin: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.songTag:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.removeButton {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.removeButton:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.primaryButton {
+  background: linear-gradient(to right, #ec4899, #6366f1);
+  color: white;
+}
+
+.primaryButton:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.primaryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.secondaryButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.recommendations {
+  margin-top: 3rem;
+}
+
+.recommendationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.recommendationCard {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.recommendationCard:hover {
+  transform: scale(1.02);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.songTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.songMeta {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .searchContainer {
+    max-width: 100%;
+  }
+
+  .recommendationGrid {
+    grid-template-columns: 1fr;
+  }
+}
