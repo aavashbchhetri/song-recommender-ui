@@ -33,6 +33,7 @@ def preload():
     # Load scaler
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     try:
         resp = requests.get(DEFAULT_SCALER_URL)
         resp.raise_for_status()
@@ -166,6 +167,43 @@ def get_recommendations(input_songs, top_k=5):
         FEATURES_ALL = FEATURES_ALL_SCALED = np.zeros((0,0))
         TRACK_NAMES = LOWERED = np.array([])
 
+=======
+    try:
+        resp = requests.get(DEFAULT_SCALER_URL)
+        resp.raise_for_status()
+        SCALER = cloudpickle.loads(resp.content)
+    except Exception as e:
+        print(f"Error loading scaler: {e}", file=sys.stderr)
+        SCALER = None
+
+    # Load model (optional, if used)
+    try:
+        resp = requests.get(DEFAULT_NN_MODEL_URL)
+        resp.raise_for_status()
+        MODEL = cloudpickle.loads(resp.content)
+    except Exception as e:
+        print(f"Error loading model: {e}", file=sys.stderr)
+        MODEL = None
+
+    # Load dataset
+    try:
+        SONGS_DF = pd.read_csv(DEFAULT_DATASET_URL)
+        numeric_cols = SONGS_DF.select_dtypes(include=[np.number]).columns.tolist()
+        FEATURES_ALL = SONGS_DF[numeric_cols].fillna(0).values.astype(float)
+        FEATURES_ALL_SCALED = SCALER.transform(FEATURES_ALL) if SCALER else FEATURES_ALL
+
+        TRACK_NAMES = SONGS_DF["track_name"].fillna("").astype(str).values
+        try:
+            LOWERED = np.char.lower(TRACK_NAMES)
+        except Exception:
+            LOWERED = np.array([str(x).lower() for x in TRACK_NAMES])
+    except Exception as e:
+        print(f"Error loading dataset: {e}", file=sys.stderr)
+        SONGS_DF = pd.DataFrame()
+        FEATURES_ALL = FEATURES_ALL_SCALED = np.zeros((0,0))
+        TRACK_NAMES = LOWERED = np.array([])
+
+>>>>>>> 48fd38e... Refactor recommend.py for better structure
 # Run preload at cold start
 preload()
 
@@ -178,6 +216,9 @@ def get_recommendations(input_songs, top_k=5):
     if FEATURES_ALL_SCALED is None or TRACK_NAMES is None or len(TRACK_NAMES) == 0:
         return []
 
+<<<<<<< HEAD
+>>>>>>> 48fd38e... Refactor recommend.py for better structure
+=======
 >>>>>>> 48fd38e... Refactor recommend.py for better structure
     if not input_songs:
         return TRACK_NAMES[:top_k].tolist()
@@ -228,6 +269,7 @@ if __name__ == "__main__":
                 input_songs = [args[0]]
         else:
             input_songs = []
+<<<<<<< HEAD
 
         input_songs = [s.strip() for s in input_songs if s.strip()]
         recs = get_recommendations(input_songs, top_k=5)
@@ -235,6 +277,15 @@ if __name__ == "__main__":
         # Always output valid JSON
         print(json.dumps(recs))
 
+=======
+
+        input_songs = [s.strip() for s in input_songs if s.strip()]
+        recs = get_recommendations(input_songs, top_k=5)
+
+        # Always output valid JSON
+        print(json.dumps(recs))
+
+>>>>>>> 48fd38e... Refactor recommend.py for better structure
     except Exception as e:
         # Catch any error and output JSON
         print(json.dumps({"error": str(e)}))
