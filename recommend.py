@@ -39,14 +39,15 @@ def preload():
         print(f"Error loading scaler: {e}", file=sys.stderr)
         SCALER = None
 
-    # Load model (optional, if used)
-    try:
-        resp = requests.get(DEFAULT_NN_MODEL_URL)
-        resp.raise_for_status()
-        MODEL = cloudpickle.loads(resp.content)
-    except Exception as e:
-        print(f"Error loading model: {e}", file=sys.stderr)
-        MODEL = None
+    # Load model (optional, if used) - commented out to speed up loading
+    # try:
+    #     resp = requests.get(DEFAULT_NN_MODEL_URL)
+    #     resp.raise_for_status()
+    #     MODEL = cloudpickle.loads(resp.content)
+    # except Exception as e:
+    #     print(f"Error loading model: {e}", file=sys.stderr)
+    #     MODEL = None
+    MODEL = None
 
     # Load dataset
     try:
