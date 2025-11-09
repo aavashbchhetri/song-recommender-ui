@@ -1,0 +1,6 @@
+fastapi==0.95.3
+uvicorn[standard]==0.22.0
+cloudpickle==2.2.1
+numpy
+pandas
+scikit-learn

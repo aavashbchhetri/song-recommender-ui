@@ -48,10 +48,37 @@ export default function Home() {
 
     setLoading(true);
     try {
-      const response = await axios.post("/api/songs", { songs: selectedSongs });
-      setRecommendations(response.data);
+      const response = await axios.post(
+        "/api/songs",
+        { songs: selectedSongs },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      if (response.data && Array.isArray(response.data)) {
+        setRecommendations(response.data);
+      } else if (
+        response.data &&
+        Array.isArray(response.data.recommendations)
+      ) {
+        setRecommendations(response.data.recommendations);
+      } else {
+        setRecommendations([]);
+        console.error("Unexpected response format:", response.data);
+      }
     } catch (error) {
       console.error("Error getting recommendations:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Response details:", {
+          status: error.response?.status,
+          data: error.response?.data,
+          headers: error.response?.headers,
+        });
+      }
+      setRecommendations([]);
     } finally {
       setLoading(false);
     }
