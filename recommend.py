@@ -18,11 +18,11 @@ TRACK_NAMES = None
 LOWERED = None
 
 # -----------------------------
-# Supabase URLs
+# Backend URLs
 # -----------------------------
-DEFAULT_NN_MODEL_URL = "https://xsfhvuvvyofxqudqnbyi.supabase.co/storage/v1/object/public/song-recommender-model/nn_model.pkl"
-DEFAULT_SCALER_URL = "https://xsfhvuvvyofxqudqnbyi.supabase.co/storage/v1/object/public/song-recommender-model/scaler.pkl"
-DEFAULT_DATASET_URL = "https://xsfhvuvvyofxqudqnbyi.supabase.co/storage/v1/object/public/song-recommender-model/songs_data.csv"
+DEFAULT_NN_MODEL_URL = "https://song-recommeder-backend-hbyp.onrender.com/models/nn_model.pkl"
+DEFAULT_SCALER_URL = "https://song-recommeder-backend-hbyp.onrender.com/models/scaler.pkl"
+DEFAULT_DATASET_URL = "https://song-recommeder-backend-hbyp.onrender.com/models/songs_data.csv"
 
 # -----------------------------
 # Preload function

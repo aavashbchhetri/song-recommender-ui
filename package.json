@@ -9,15 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.80.0",
     "@tailwindcss/postcss": "^4.1.17",
     "axios": "^1.13.2",
     "next": "16.0.1",
     "pandas": "^0.0.3",
     "python-shell": "^5.0.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "supabase": "^2.54.11"
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@types/node": "^20",
